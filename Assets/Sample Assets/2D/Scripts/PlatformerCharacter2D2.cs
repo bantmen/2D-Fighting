@@ -38,7 +38,7 @@ public class PlatformerCharacter2D2 : MonoBehaviour
 
 		script = GetComponent <PlayerMoves2> ();
 
-		go = GameObject.Find ("2D Character");
+		go = GameObject.Find ("2D Character-1");
 		script2 = go.GetComponent <PlatformerCharacter2D> ();
 	}
 

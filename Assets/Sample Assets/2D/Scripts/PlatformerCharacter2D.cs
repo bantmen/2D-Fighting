@@ -52,7 +52,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 	
 		if (!audio.isPlaying) {
-			audio.PlayOneShot(pushing);
+			//audio.PlayOneShot(pushing);
 		}
 	}
 

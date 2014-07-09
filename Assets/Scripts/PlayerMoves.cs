@@ -250,11 +250,11 @@ public class PlayerMoves : MonoBehaviour {
 
 
 	void SpeakForMe (string message) {
-		Process say = new Process ();
-		say.StartInfo.FileName   = "C:\\Users\\Berkay Antmen\\Documents\\2D Fighting\\Assets\\Tools\\SpeechDemo.exe";  
-		say.StartInfo.Arguments = message;
-		say.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-		say.Start();
+//		Process say = new Process ();
+//		say.StartInfo.FileName   = "C:\\Users\\Berkay Antmen\\Documents\\2D Fighting\\Assets\\Tools\\SpeechDemo.exe";  
+//		say.StartInfo.Arguments = message;
+//		say.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+//		say.Start();
 	}
 
 	bool Facing () {
