@@ -25,7 +25,7 @@ public class FireAudio : MonoBehaviour {
 		pos1 = go1.transform.position.x;
 		pos2 = go2.transform.position.x;
 		if (!audio.isPlaying && (Mathf.Abs(transform.position.x - pos1) < epsilon || Mathf.Abs(transform.position.x - pos2) < epsilon)) {
-			//audio.Play ();
+			audio.Play ();
 			if (Mathf.Abs(transform.position.x - pos1) < epsilon/2) {
 				if (lastTime == 0 || Time.time - lastTime > cooldown ) {
 					script1.hitPoint -= 10;
