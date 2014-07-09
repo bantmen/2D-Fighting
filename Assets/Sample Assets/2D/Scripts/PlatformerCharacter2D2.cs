@@ -29,6 +29,7 @@ public class PlatformerCharacter2D2 : MonoBehaviour
 	public bool moving = false;
 	public AudioClip pushing;
 
+
     void Awake()
 	{
 		groundCheck = transform.Find("GroundCheck");
@@ -113,7 +114,7 @@ public class PlatformerCharacter2D2 : MonoBehaviour
 			if (grounded && jump) {
 				// Add a vertical force to the player.
 				anim.SetBool("Ground", false);
-				//            rigidbody2D.AddForce(new Vector2(0f, jumpForce));          JUMP DISABLED
+				// rigidbody2D.AddForce(new Vector2(0f, jumpForce));          JUMP DISABLED
 			}
 		}
 
@@ -140,8 +141,8 @@ public class PlatformerCharacter2D2 : MonoBehaviour
 		
 		if ((moving || script2.moving) && Facing ()) {  //then someone is pushing
 			if (!audio.isPlaying) {
-				audio.PlayOneShot(pushing);
-				Debug.Log(123);
+				//audio.PlayOneShot(pushing);
+				//Debug.Log(123);
 			}
 		}
 	}

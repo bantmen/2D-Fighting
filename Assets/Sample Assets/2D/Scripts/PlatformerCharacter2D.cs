@@ -51,9 +51,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 		// Set the vertical animation
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 	
-		if (!audio.isPlaying) {
-			audio.PlayOneShot(pushing);
-		}
 	}
 
 
@@ -139,9 +136,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other) {
 
 		if ((moving || script2.moving) && Facing ()) {  //then someone is pushing
-				if (!audio.isPlaying) {
+				if (!audio.isPlaying && Time.time % 1.5 == 0) {
 					audio.PlayOneShot(pushing);
-					Debug.Log(123);
+					//Debug.Log(123);
 				}
 		}
 	}
