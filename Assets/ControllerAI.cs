@@ -8,12 +8,13 @@ public class ControllerAI : MonoBehaviour {
 	float current_my_pos;
 	bool withinKick;
 	bool withinPunch;
-	float 
+	bool shouldRange;
 
 	//player1
 	PlayerMoves player1_script;
 	float kickEpsilon;
 	float punchEpsilon;
+	float rangeEpsilon;
 	GameObject player1_go;
 	float current_enemy_pos;
 
@@ -27,6 +28,7 @@ public class ControllerAI : MonoBehaviour {
 		player1_script = player1_go.GetComponent <PlayerMoves> ();
 		kickEpsilon = player1_script.epsilonKick1;
 		punchEpsilon = player1_script.epsilonPunch2;
+		rangeEpsilon = 10f;  //CAN CHANGE LATER
 
 		fireRight_go = GameObject.Find ("FireRight");
 	}
@@ -46,52 +48,63 @@ public class ControllerAI : MonoBehaviour {
 			withinKick = false;
 			withinPunch = false;
 		}
-		Defensive (withinKick, withinPunch);
+		if (current_my_pos - current_enemy_pos > rangeEpsilon) {
+			shouldRange = true;
+		}
+		else{
+			shouldRange = false;
+		}
+		Defensive (withinKick, withinPunch, shouldRange);
 		if (EpsilonCheck (current_my_pos, fireRightEpsilon, current_fireRight_pos)) {
 			Debug.Log("near fire");
 			MoveList(0);
 		}
 		else {
 			Debug.Log("away from fire");
-			if (!withinKick && ! withinPunch) MoveList(0);
+			if (!withinKick && !withinPunch && !shouldRange) MoveList(0);
 		}
 	}
 		
 	void MoveList (int num) {
-		switch (num)
-		{
-		case 0:
-			SendKeys.Send("A");  //move left
-			break;
-		case 1:
-			SendKeys.Send("D");  //move right
-			break;
-		case 2:
-			SendKeys.Send("W");  //kick
-			break;
-		case 3:
-			SendKeys.Send("H");  //punch
-			break;
-		case 4:
-			SendKeys.Send("+"); //range attack
-			break;
-		case 5:
-			break;              //stand idle
+		switch (num){
+			case 0:
+				SendKeys.Send("A");  //move left
+				break;
+			case 1:
+				SendKeys.Send("D");  //move right
+				break;
+			case 2:
+				SendKeys.Send("W");  //kick
+				break;
+			case 3:
+				SendKeys.Send("H");  //punch
+				break;
+			case 4:
+				SendKeys.Send("Z"); //range attack
+				break;
+			case 5:
+				break;              //stand idle
 		}
 	}
 
-	void Defensive (bool kick, bool punch) {
+	void Defensive (bool kick, bool punch, bool range) {
 		MoveList (5);
-		if (kick) MoveList(2); //kick
-		else if (punch) MoveList(3); //punch
-		else MoveList(5); //idle
-		if (kick || punch) {
-			//MoveList(1);  //block
-			//MoveList(0);  //go back
+		if (!range) {
+			if (kick) MoveList(2);        //kick
+			else if (punch) MoveList(3);  //punch
+			else MoveList(5);             //idle
+			if (kick || punch) {
+				//MoveList(1);            //block
+				//MoveList(0);            //go back
+			}
+		}
+		else {
+			Debug.Log("here");
+			MoveList(4);                  //range
 		}
 	}
 
-	bool EpsilonCheck (float you, float epsilon, float target){
+	bool EpsilonCheck (float you, float epsilon, float target){  //DOES NOT CHECK FOR THE UPPERBOUND!
 		return Mathf.Abs (you - target) <= epsilon;
 	}
 }
