@@ -16,7 +16,7 @@ public class ControllerAI : MonoBehaviour {
 	bool shouldRange;
 
 	//my character - config - defensive
-	float blockCooldown = 1.35f;
+	float blockCooldown = 5f;
 	float lastBlock = -1f;
 
 	//player1
@@ -79,7 +79,7 @@ public class ControllerAI : MonoBehaviour {
 			MoveList(0);
 		}
 		else {
-			if (!withinKick && !withinPunch && !shouldRange && playMode == 0) MoveList(0);
+			if (!withinKick && !withinPunch && !shouldRange) MoveList(0);
 		}
 	}
 		
@@ -109,7 +109,6 @@ public class ControllerAI : MonoBehaviour {
 	}
 
 	void Aggressive (bool kick, bool punch, bool range) {   //playMode -> 0
-		Debug.Log ("Aggressive");
 		MoveList (5);       //idle
 		if (!range) {
 			if (kick) MoveList(2);        //kick
@@ -123,20 +122,22 @@ public class ControllerAI : MonoBehaviour {
 	}
 
 	void Defensive (bool kick, bool punch, bool range){    //playMode -> 1
-		Debug.Log ("Defensive");
-		bool isFacing = my_characterMoves.Facing ();      // checking if facing IN THE beginning
+		bool isFacing = my_characterMoves.Facing ();       // checking if facing IN THE beginning
 		if (range) {         //if there is a distance between two characters 
-			MoveList(0);
 			if (isFacing && CooldownCheck(blockCooldown, lastBlock)) {
 				MoveList(6); //flip
 				lastBlock = Time.time;
+			}
+			else {
+				Debug.Log("in else");
+				MoveList(0);
 			}
 		}
 		else {               //if the characters are close to each other
 			if ((kick || punch) && !isFacing) MoveList(6); 
 			if (kick) MoveList(2);        //kick
 			else if (punch) MoveList(3);  //punch
-			MoveList(6);
+			//MoveList(6);
 		}
 	}
 	
