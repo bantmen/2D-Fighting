@@ -75,7 +75,7 @@ public class PlayerMoves2AI : MonoBehaviour {
 		script3 = go.GetComponent <PlatformerCharacter2D> ();
 	}
 
-	void Update () {
+	f void Update () {
 		AudioClip[] audioArray = {kick_1, kick_2, punch_1, punch_2, thrown_1, concentrate_1};   //move it to start
 		if (script.temp_swinged != 0 && swingLanded == 2) {   //regarding getting hit
 			audio.PlayOneShot(audioArray[script.temp_swinged-1]);  //since 0 -> None
@@ -212,7 +212,7 @@ public class PlayerMoves2AI : MonoBehaviour {
 			}
 		} 
 	}
-
+	
 
 //	void FixedUpdate ()  {
 //		if (hitPoint <= 0 && script.hitPoint != 0) {                          //GAME OVER
