@@ -8,6 +8,7 @@ public class ControllerAI : MonoBehaviour {
 	float current_my_pos;
 	bool withinKick;
 	bool withinPunch;
+	float 
 
 	//player1
 	PlayerMoves player1_script;
@@ -45,20 +46,49 @@ public class ControllerAI : MonoBehaviour {
 			withinKick = false;
 			withinPunch = false;
 		}
+		Defensive (withinKick, withinPunch);
 		if (EpsilonCheck (current_my_pos, fireRightEpsilon, current_fireRight_pos)) {
 			Debug.Log("near fire");
-			//SendKeys.Send("A");
+			MoveList(0);
 		}
 		else {
 			Debug.Log("away from fire");
-			//SendKeys.Send("D");
+			if (!withinKick && ! withinPunch) MoveList(0);
+		}
+	}
+		
+	void MoveList (int num) {
+		switch (num)
+		{
+		case 0:
+			SendKeys.Send("A");  //move left
+			break;
+		case 1:
+			SendKeys.Send("D");  //move right
+			break;
+		case 2:
+			SendKeys.Send("W");  //kick
+			break;
+		case 3:
+			SendKeys.Send("H");  //punch
+			break;
+		case 4:
+			SendKeys.Send("+"); //range attack
+			break;
+		case 5:
+			break;              //stand idle
 		}
 	}
 
-	void Defensive(){	
-	}
-
-	void Aggressive(){
+	void Defensive (bool kick, bool punch) {
+		MoveList (5);
+		if (kick) MoveList(2); //kick
+		else if (punch) MoveList(3); //punch
+		else MoveList(5); //idle
+		if (kick || punch) {
+			//MoveList(1);  //block
+			//MoveList(0);  //go back
+		}
 	}
 
 	bool EpsilonCheck (float you, float epsilon, float target){

@@ -119,7 +119,7 @@ public class PlayerMoves2AI : MonoBehaviour {
 				else {
 					swinged = 0;                        //None
 				}
-				if (Input.GetKeyDown (KeyCode.LeftShift)) {  //Projectile-1
+				if (Input.GetKeyDown (KeyCode.RightShift)) {  //Projectile-1
 					thrown = 1;
 				}
 			}

@@ -184,7 +184,7 @@ public class PlayerMoves : MonoBehaviour {
 			
 			//PUSH/RECOIL?
 			
-			if (Input.GetKeyDown (KeyCode.RightShift)) {
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {
 				SpeakForMe (Mathf.Round(hitPoint).ToString());                 //tells you your hitpoints
 			}
 		}
