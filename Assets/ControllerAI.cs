@@ -5,6 +5,7 @@ using System.Windows.Forms;
 public class ControllerAI : MonoBehaviour {
 
 	//my character
+	byte playMode; // 0 -> Aggressive, 1 -> Defensive
 	float current_my_pos;
 	bool withinKick;
 	bool withinPunch;
@@ -24,6 +25,8 @@ public class ControllerAI : MonoBehaviour {
 	float current_fireRight_pos;
 
 	void Start () {
+		playMode = 0;
+
 		player1_go = GameObject.Find ("2D Character-1");
 		player1_script = player1_go.GetComponent <PlayerMoves> ();
 		kickEpsilon = player1_script.epsilonKick1;
@@ -54,7 +57,15 @@ public class ControllerAI : MonoBehaviour {
 		else{
 			shouldRange = false;
 		}
-		Defensive (withinKick, withinPunch, shouldRange);
+		switch (playMode){
+			case 0:
+				Aggressive (withinKick, withinPunch, shouldRange);
+				break;
+			case 1:
+				Defensive (withinKick, withinPunch, shouldRange);
+				break;
+		}
+
 		if (EpsilonCheck (current_my_pos, fireRightEpsilon, current_fireRight_pos)) {
 			Debug.Log("near fire");
 			MoveList(0);
@@ -87,21 +98,21 @@ public class ControllerAI : MonoBehaviour {
 		}
 	}
 
-	void Defensive (bool kick, bool punch, bool range) {
+	void Aggressive (bool kick, bool punch, bool range) {   //playMode -> 0
 		MoveList (5);
 		if (!range) {
 			if (kick) MoveList(2);        //kick
 			else if (punch) MoveList(3);  //punch
 			else MoveList(5);             //idle
-			if (kick || punch) {
-				//MoveList(1);            //block
-				//MoveList(0);            //go back
-			}
 		}
 		else {
 			Debug.Log("here");
 			MoveList(4);                  //range
 		}
+	}
+
+	void Defensive (bool kick, bool punch, bool range){    //playMode -> 1
+
 	}
 
 	bool EpsilonCheck (float you, float epsilon, float target){  //DOES NOT CHECK FOR THE UPPERBOUND!
