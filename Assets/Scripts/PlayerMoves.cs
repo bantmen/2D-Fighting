@@ -20,10 +20,10 @@ public class PlayerMoves : MonoBehaviour {
 	public AudioClip blocked;
 
 	public byte swinged = 0; // 0, 1, 2, 3, 4 -> None, Punch-1, Punch-2, Kick-1, Kick-2
-	float epsilonKick1 = 1.451275f;    //ADD PUSH TO EACH
+	public float epsilonKick1 = 1.451275f;    //ADD PUSH TO EACH
 	float epsilonKick2 = 1.361275f;
 	float epsilonPunch1 = 1.210906f;
-	float epsilonPunch2 = 1.010906f;
+	public float epsilonPunch2 = 1.010906f;
 	float epsilon;   //swing range
 	float countKick1 = 0.6f;
 	float countKick2 = 0.55f;

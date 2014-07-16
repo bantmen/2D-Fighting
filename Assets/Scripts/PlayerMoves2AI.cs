@@ -75,7 +75,7 @@ public class PlayerMoves2AI : MonoBehaviour {
 		script3 = go.GetComponent <PlatformerCharacter2D> ();
 	}
 
-	f void Update () {
+	void Update () {
 		AudioClip[] audioArray = {kick_1, kick_2, punch_1, punch_2, thrown_1, concentrate_1};   //move it to start
 		if (script.temp_swinged != 0 && swingLanded == 2) {   //regarding getting hit
 			audio.PlayOneShot(audioArray[script.temp_swinged-1]);  //since 0 -> None
@@ -213,22 +213,6 @@ public class PlayerMoves2AI : MonoBehaviour {
 		} 
 	}
 	
-
-//	void FixedUpdate ()  {
-//		if (hitPoint <= 0 && script.hitPoint != 0) {                          //GAME OVER
-//			if (speakOnce) {
-//				SpeakForMe("Player 1 is victorious. Game Over. Better luck next time. To play again press space bar.");
-//				speakOnce = false;
-//			}
-//			if (Input.GetKeyDown(KeyCode.Space)) {
-//				Application.LoadLevel(Application.loadedLevel);
-//			}
-//		}                        
-//		if (transform.position.y <= -5) {             //Falling down
-//			hitPoint = 0;
-//		}
-//	}
-
 	void SpeakForMe (string message) {
 		Process say = new Process ();
 		say.StartInfo.FileName   = "C:\\Users\\Berkay Antmen\\Documents\\2D Fighting\\Assets\\Tools\\SpeechDemo.exe";  
