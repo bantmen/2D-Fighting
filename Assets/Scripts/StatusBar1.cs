@@ -4,11 +4,11 @@ using System.Collections;
 public class StatusBar1 : MonoBehaviour {
 
 	GameObject go;
-	PlayerMoves2 script;
+	PlayerMoves2AI script;
 
 	void Start () {
-		go = GameObject.Find ("2D Character-2");
-		script = go.GetComponent <PlayerMoves2> ();
+		go = GameObject.Find ("2D Character-2-AI");  //FIX IT BACK FOR THE MULTIPLAYER
+		script = go.GetComponent <PlayerMoves2AI> ();
 
 	}
 

@@ -8,7 +8,7 @@ public class MoveAudioListener : MonoBehaviour {
 
 	void Start () {
 		go = GameObject.Find ("2D Character-1");  //the blind player
-		go2 = GameObject.Find ("2D Character-2");
+		go2 = GameObject.Find ("2D Character-2-AI");  //FIX IT BACK FOR THE MULTIPLAYER!!!
 	}
 
 	void Update () {                                           //NEED TO FIX THIS AUDIO OUTPUT ISSUE

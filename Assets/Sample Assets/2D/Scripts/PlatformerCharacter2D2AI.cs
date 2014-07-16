@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class PlatformerCharacter2D : MonoBehaviour 
+public class PlatformerCharacter2D2AI : MonoBehaviour 
 {
 	public bool facingRight = true;							// For determining which way the player is currently facing.
 
@@ -20,25 +21,26 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float ceilingRadius = .01f;							// Radius of the overlap circle to determine if the player can stand up
 	Animator anim;										// Reference to the player's animator component.
 
-	PlayerMoves script;  //to look for isFocusing
+	PlayerMoves2AI script;
 	public AudioClip grunt;
 
 	GameObject go;
-	PlatformerCharacter2D2AI script2; //to look for move
+	PlatformerCharacter2D script2; //to look for move
 	public bool moving = false;
 	public AudioClip pushing;
 
+
     void Awake()
 	{
-		// Setting up references.
 		groundCheck = transform.Find("GroundCheck");
 		ceilingCheck = transform.Find("CeilingCheck");
 		anim = GetComponent<Animator>();
+		Flip ();
 
-		script = GetComponent <PlayerMoves> ();
+		script = GetComponent <PlayerMoves2AI> ();
 
-		go = GameObject.Find ("2D Character-2-AI");
-		script2 = go.GetComponent <PlatformerCharacter2D2AI> ();
+		go = GameObject.Find ("2D Character-1");
+		script2 = go.GetComponent <PlatformerCharacter2D> ();
 	}
 
 
@@ -50,15 +52,12 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 		// Set the vertical animation
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
-	
 	}
 
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-
 		if (!script.isFocusing) {
-			
 			// If crouching, check to see if the character can stand up
 			if(!crouch && anim.GetBool("Crouch"))
 			{
@@ -78,11 +77,13 @@ public class PlatformerCharacter2D : MonoBehaviour
 				
 				// The Speed animator parameter is set to the absolute value of the horizontal input.
 				anim.SetFloat("Speed", Mathf.Abs(move));
-				
+
 				if (move != 0 && !audio.isPlaying && grounded) {
 					audio.Play();
+					
 				}
 				
+				// Move the character
 				rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
 				
 				// If the input is moving the player right and the player is facing left...
@@ -90,12 +91,14 @@ public class PlatformerCharacter2D : MonoBehaviour
 					// ... flip the player.
 					Flip();
 					audio.PlayOneShot(grunt);
+					moving = true;
 				}
 				// Otherwise if the input is moving the player left and the player is facing right...
 				else if(move < 0 && facingRight) {
 					// ... flip the player.
 					Flip();
 					audio.PlayOneShot(grunt);
+					moving = true;
 				}
 
 				if (move == 0) {
@@ -104,17 +107,18 @@ public class PlatformerCharacter2D : MonoBehaviour
 				else {
 					moving = true;
 				}
+
 			}
 			
 			// If the player should jump...
 			if (grounded && jump) {
 				// Add a vertical force to the player.
 				anim.SetBool("Ground", false);
-				//            rigidbody2D.AddForce(new Vector2(0f, jumpForce));             JUMP DISABLED
+				// rigidbody2D.AddForce(new Vector2(0f, jumpForce));          JUMP DISABLED
 			}
 		}
-		}
 
+	}
 
 	
 	void Flip ()
@@ -134,12 +138,12 @@ public class PlatformerCharacter2D : MonoBehaviour
 	}
 	
 	void OnTriggerEnter2D (Collider2D other) {
-
+		
 		if ((moving || script2.moving) && Facing ()) {  //then someone is pushing
-				if (!audio.isPlaying && Time.time % 1.5 == 0) {
-					audio.PlayOneShot(pushing);
-					//Debug.Log(123);
-				}
+			if (!audio.isPlaying) {
+				//audio.PlayOneShot(pushing);
+				//Debug.Log(123);
+			}
 		}
 	}
 
