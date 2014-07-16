@@ -221,7 +221,7 @@ public class PlayerMoves2AI : MonoBehaviour {
 		say.Start();
 	}
 
-	bool Facing () {
+	public bool Facing () {    //PUBLIC FOR AI TO USE
 		if (script3.facingRight && !script2.facingRight) return true;
 		else return false;
 	}

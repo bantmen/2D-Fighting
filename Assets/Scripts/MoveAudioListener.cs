@@ -13,10 +13,12 @@ public class MoveAudioListener : MonoBehaviour {
 
 	void Update () {                                           //NEED TO FIX THIS AUDIO OUTPUT ISSUE
 		Vector3 temp = transform.position;
-		temp.x = (go.transform.position.x + go2.transform.position.x)/2;
-		temp.y = (go.transform.position.y + go2.transform.position.y)/2;
-		//temp.x = go.transform.position.x;
-		//temp.y = go.transform.position.y;
+				//CHOOSE THIS FOR MULTIPLAYER
+		//temp.x = (go.transform.position.x + go2.transform.position.x)/2;
+		//temp.y = (go.transform.position.y + go2.transform.position.y)/2;
+				//CHOOSE THIS FOR SINGLEPLAYER
+		temp.x = go.transform.position.x;
+		temp.y = go.transform.position.y;
 		transform.position = temp;
 
 	}

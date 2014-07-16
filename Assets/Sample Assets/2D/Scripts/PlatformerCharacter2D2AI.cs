@@ -120,8 +120,8 @@ public class PlatformerCharacter2D2AI : MonoBehaviour
 
 	}
 
-	
-	void Flip ()
+
+	public void Flip ()  //PUBLIC SO AI CAN FLIP IT
 	{
 		// Switch the way the player is labelled as facing.
 		facingRight = !facingRight;

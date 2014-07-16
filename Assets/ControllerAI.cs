@@ -4,12 +4,20 @@ using System.Windows.Forms;
 
 public class ControllerAI : MonoBehaviour {
 
-	//my character
-	byte playMode; // 0 -> Aggressive, 1 -> Defensive
+	//my character - config - hard
+	byte playMode = 1; // 0 -> Aggressive, 1 -> Defensive
+	PlatformerCharacter2D2AI my_characterScript;
+	PlayerMoves2AI my_characterMoves;
+
+	//my character - config - soft
 	float current_my_pos;
 	bool withinKick;
 	bool withinPunch;
 	bool shouldRange;
+
+	//my character - config - defensive
+	float blockCooldown = 1.35f;
+	float lastBlock = -1f;
 
 	//player1
 	PlayerMoves player1_script;
@@ -25,7 +33,8 @@ public class ControllerAI : MonoBehaviour {
 	float current_fireRight_pos;
 
 	void Start () {
-		playMode = 0;
+		my_characterScript = GetComponent<PlatformerCharacter2D2AI> ();
+		my_characterMoves = GetComponent<PlayerMoves2AI> ();
 
 		player1_go = GameObject.Find ("2D Character-1");
 		player1_script = player1_go.GetComponent <PlayerMoves> ();
@@ -67,12 +76,10 @@ public class ControllerAI : MonoBehaviour {
 		}
 
 		if (EpsilonCheck (current_my_pos, fireRightEpsilon, current_fireRight_pos)) {
-			Debug.Log("near fire");
 			MoveList(0);
 		}
 		else {
-			Debug.Log("away from fire");
-			if (!withinKick && !withinPunch && !shouldRange) MoveList(0);
+			if (!withinKick && !withinPunch && !shouldRange && playMode == 0) MoveList(0);
 		}
 	}
 		
@@ -95,11 +102,15 @@ public class ControllerAI : MonoBehaviour {
 				break;
 			case 5:
 				break;              //stand idle
+			case 6:
+				my_characterScript.Flip();
+				break;
 		}
 	}
 
 	void Aggressive (bool kick, bool punch, bool range) {   //playMode -> 0
-		MoveList (5);
+		Debug.Log ("Aggressive");
+		MoveList (5);       //idle
 		if (!range) {
 			if (kick) MoveList(2);        //kick
 			else if (punch) MoveList(3);  //punch
@@ -112,10 +123,28 @@ public class ControllerAI : MonoBehaviour {
 	}
 
 	void Defensive (bool kick, bool punch, bool range){    //playMode -> 1
-
+		Debug.Log ("Defensive");
+		bool isFacing = my_characterMoves.Facing ();      // checking if facing IN THE beginning
+		if (range) {         //if there is a distance between two characters 
+			MoveList(0);
+			if (isFacing && CooldownCheck(blockCooldown, lastBlock)) {
+				MoveList(6); //flip
+				lastBlock = Time.time;
+			}
+		}
+		else {               //if the characters are close to each other
+			if ((kick || punch) && !isFacing) MoveList(6); 
+			if (kick) MoveList(2);        //kick
+			else if (punch) MoveList(3);  //punch
+			MoveList(6);
+		}
 	}
-
+	
 	bool EpsilonCheck (float you, float epsilon, float target){  //DOES NOT CHECK FOR THE UPPERBOUND!
 		return Mathf.Abs (you - target) <= epsilon;
+	}
+
+	bool CooldownCheck (float cooldown, float lastTime) {
+		return lastTime == -1 || Time.time - cooldown > lastTime;  //-1 to check if initialized
 	}
 }
