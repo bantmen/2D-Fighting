@@ -125,7 +125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 26621720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b48000eadc14014bad9fe8b8f80b34b, type: 3}
+  m_Script: {fileID: 11500000, guid: ccf1aa5c6bcdb474f8bcd33f127e9291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   epsilon: 2
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1309781905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d4176c169c9a9e4cade809eb3462da5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ac734d3833ad0b4487c58e57f7163a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kick_swing_1: {fileID: 8300000, guid: c9c929acf8577034c915769ad7a60adc, type: 3}
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1362664275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b48000eadc14014bad9fe8b8f80b34b, type: 3}
+  m_Script: {fileID: 11500000, guid: ccf1aa5c6bcdb474f8bcd33f127e9291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   epsilon: 2
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431502322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7270d38731c72e4cb33f5e1e9777366, type: 3}
+  m_Script: {fileID: 11500000, guid: 00ae5495fa35c4145b88b7e79e4e5cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1606560475

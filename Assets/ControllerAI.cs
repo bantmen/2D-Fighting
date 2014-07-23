@@ -20,7 +20,7 @@ public class ControllerAI : MonoBehaviour {
 	float lastBlock = -1f;
 
 	//player1
-	PlayerMoves player1_script;
+	PlayerMovesAI player1_script;
 	float kickEpsilon;
 	float punchEpsilon;
 	float rangeEpsilon;
@@ -37,7 +37,7 @@ public class ControllerAI : MonoBehaviour {
 		my_characterMoves = GetComponent<PlayerMoves2AI> ();
 
 		player1_go = GameObject.Find ("2D Character-1");
-		player1_script = player1_go.GetComponent <PlayerMoves> ();
+		player1_script = player1_go.GetComponent <PlayerMovesAI> ();
 		kickEpsilon = player1_script.epsilonKick1;
 		punchEpsilon = player1_script.epsilonPunch2;
 		rangeEpsilon = 10f;  //CAN CHANGE LATER
