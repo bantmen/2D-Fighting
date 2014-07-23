@@ -24,7 +24,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 	public AudioClip grunt;
 
 	GameObject go;
-	PlatformerCharacter2D2AI script2; //to look for move
+	PlatformerCharacter2D2 script2; //to look for move
 	public bool moving = false;
 	public AudioClip pushing;
 
@@ -37,8 +37,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 		script = GetComponent <PlayerMoves> ();
 
-		go = GameObject.Find ("2D Character-2-AI");
-		script2 = go.GetComponent <PlatformerCharacter2D2AI> ();
+		go = GameObject.Find ("2D Character-2");
+		script2 = go.GetComponent <PlatformerCharacter2D2> ();
 	}
 
 

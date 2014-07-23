@@ -6,7 +6,7 @@ public class FireAudio : MonoBehaviour {
 	GameObject go1;
 	GameObject go2;
 	PlayerMoves script1;
-	PlayerMoves2AI script2;
+	PlayerMoves2 script2;
 	float cooldown = 1.5f;
 	float lastTime = 0;
 
@@ -17,8 +17,8 @@ public class FireAudio : MonoBehaviour {
 	void Start () {
 		go1 = GameObject.Find ("2D Character-1");
 		script1 = go1.GetComponent<PlayerMoves> ();
-		go2 = GameObject.Find ("2D Character-2-AI");  //FIX IT BACK FOR THE MULTIPLAYER GAME
-		script2 = go2.GetComponent<PlayerMoves2AI> ();
+		go2 = GameObject.Find ("2D Character-2");  //FIX IT BACK FOR THE MULTIPLAYER GAME
+		script2 = go2.GetComponent<PlayerMoves2> ();
 	}
 
 	void FixedUpdate () {   //fire sound is heard if either of the players is near it

@@ -55,12 +55,12 @@ public class PlayerMoves : MonoBehaviour {
 	//IMPLEMENT PUSH/RECOIL etc.
 
 	GameObject go;
-	PlayerMoves2AI script;
+	PlayerMoves2 script;
 	public byte temp_swinged = 0;   //sending the information to the other player
 
 	float distanceX;               //distance between two players
 
-	PlatformerCharacter2D2AI script2;   
+	PlatformerCharacter2D2 script2;   
 	PlatformerCharacter2D script3;   //PLAYER 1
 
 	public float hitPoint = 100;
@@ -68,11 +68,11 @@ public class PlayerMoves : MonoBehaviour {
 	bool speakOnce = true;
 		
 	void Start () {
-		go = GameObject.Find ("2D Character-2-AI");
+		go = GameObject.Find ("2D Character-2");
 //		AudioClip[] audioArray = new AudioClip[6] {kick_1, kick_2, punch_1, punch_2, thrown_1, concentrate_1};
 
-		script = go.GetComponent <PlayerMoves2AI> (); //FIX IT FOR THE MULTIPLAYER
-		script2 = go.GetComponent <PlatformerCharacter2D2AI> ();
+		script = go.GetComponent <PlayerMoves2> (); //FIX IT FOR THE MULTIPLAYER
+		script2 = go.GetComponent <PlatformerCharacter2D2> ();
 		script3 = GetComponent <PlatformerCharacter2D> ();
 	}
 
