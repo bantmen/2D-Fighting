@@ -61,7 +61,7 @@ public class PlayerMovesAI : MonoBehaviour {
 	float distanceX;               //distance between two players
 
 	PlatformerCharacter2D2AI script2;   
-	PlatformerCharacter2D script3;   //PLAYER 1
+	PlatformerCharacter2DAI script3;   //PLAYER 1
 
 	public float hitPoint = 100;
 
@@ -73,7 +73,7 @@ public class PlayerMovesAI : MonoBehaviour {
 
 		script = go.GetComponent <PlayerMoves2AI> (); //FIX IT FOR THE MULTIPLAYER
 		script2 = go.GetComponent <PlatformerCharacter2D2AI> ();
-		script3 = GetComponent <PlatformerCharacter2D> ();
+		script3 = GetComponent <PlatformerCharacter2DAI> ();
 	}
 
 	void Update () {

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 public class ControllerAI : MonoBehaviour {
 
 	//my character - config - hard
-	byte playMode = 1; // 0 -> Aggressive, 1 -> Defensive
+	byte playMode = 0; // 0 -> Aggressive, 1 -> Defensive
 	PlatformerCharacter2D2AI my_characterScript;
 	PlayerMoves2AI my_characterMoves;
 
@@ -38,7 +38,8 @@ public class ControllerAI : MonoBehaviour {
 
 		player1_go = GameObject.Find ("2D Character-1");
 		player1_script = player1_go.GetComponent <PlayerMovesAI> ();
-		kickEpsilon = player1_script.epsilonKick1;
+		//kickEpsilon = player1_script.epsilonKick1;
+		kickEpsilon = player1_script.epsilonPunch2;
 		punchEpsilon = player1_script.epsilonPunch2;
 		rangeEpsilon = 10f;  //CAN CHANGE LATER
 
@@ -92,7 +93,8 @@ public class ControllerAI : MonoBehaviour {
 				SendKeys.Send("D");  //move right
 				break;
 			case 2:
-				SendKeys.Send("W");  //kick
+				//SendKeys.Send("W");  //kick
+				SendKeys.Send("H");  //punch
 				break;
 			case 3:
 				SendKeys.Send("H");  //punch
@@ -109,8 +111,8 @@ public class ControllerAI : MonoBehaviour {
 	}
 
 	void Aggressive (bool kick, bool punch, bool range) {   //playMode -> 0
-		MoveList (5);       //idle
 		if (!range) {
+			MoveList (0);       //move
 			if (kick) MoveList(2);        //kick
 			else if (punch) MoveList(3);  //punch
 			else MoveList(5);             //idle
